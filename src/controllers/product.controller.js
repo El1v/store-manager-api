@@ -18,12 +18,11 @@ const getProduct = async (req, res) => {
 };
 
 const createProduct = async (req, res) => {
-  console.log(req.body);
   const { name } = req.body;
 
   const { type, message } = await productService.createProduct(name);
 
-  if (type) return res.status(errorMap.mapError(type)).json(message);
+  if (type) return res.status(errorMap.mapError(type)).json({ message });
 
   res.status(201).json(message);
 };
