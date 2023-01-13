@@ -19,12 +19,17 @@
     "containerId": "",
     "name": "http://localhost:3000/products/",
     "url": "http://localhost:3000/products/",
-    "method": "GET",
+    "method": "POST",
     "sortNum": 0,
     "created": "2023-01-13T18:45:08.159Z",
-    "modified": "2023-01-13T18:45:08.159Z",
+    "modified": "2023-01-13T21:12:05.897Z",
     "headers": [],
     "params": [],
+    "body": {
+      "type": "json",
+      "raw": "{\n  \"name\": \"ProdutoX\"\n}",
+      "form": []
+    },
     "tests": []
   },
   {
@@ -95,6 +100,63 @@
     "modified": "2023-01-13T19:53:05.286Z",
     "headers": [],
     "params": [],
+    "tests": []
+  },
+  {
+    "_id": "45473c60-0bce-44c2-bc56-2dabba4ddaac",
+    "colId": "history",
+    "containerId": "",
+    "name": "http://localhost:3000/products/",
+    "url": "http://localhost:3000/products",
+    "method": "POST",
+    "sortNum": 0,
+    "created": "2023-01-13T20:42:55.851Z",
+    "modified": "2023-01-13T21:10:08.570Z",
+    "headers": [],
+    "params": [],
+    "body": {
+      "type": "json",
+      "raw": "{\n  \"name\": \"ProdutoX\"\n}",
+      "form": []
+    },
+    "tests": []
+  },
+  {
+    "_id": "6828e4e4-2c36-4c72-942f-d6d5e44d97b5",
+    "colId": "history",
+    "containerId": "",
+    "name": "https://localhost:3000/products",
+    "url": "https://localhost:3000/products",
+    "method": "POST",
+    "sortNum": 0,
+    "created": "2023-01-13T21:16:45.438Z",
+    "modified": "2023-01-13T21:16:45.438Z",
+    "headers": [],
+    "params": [],
+    "body": {
+      "type": "json",
+      "raw": "{\n  \"name\": \"teste\"\n}",
+      "form": []
+    },
+    "tests": []
+  },
+  {
+    "_id": "8978156b-dcc1-440f-9c3a-90fd6ceac900",
+    "colId": "history",
+    "containerId": "",
+    "name": "https://localhost:3000/products",
+    "url": "http://localhost:3000/products",
+    "method": "POST",
+    "sortNum": 0,
+    "created": "2023-01-13T21:17:45.807Z",
+    "modified": "2023-01-13T21:20:16.951Z",
+    "headers": [],
+    "params": [],
+    "body": {
+      "type": "text",
+      "raw": "blablabla",
+      "form": []
+    },
     "tests": []
   }
 ]
