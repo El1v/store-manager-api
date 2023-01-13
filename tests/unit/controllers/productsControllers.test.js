@@ -7,7 +7,7 @@ chai.use(sinonChai);
 
 const productController = require('../../../src/controllers/product.controller');
 const productService = require('../../../src/services/product.service');
-const { productListMock, newProductMock } = require('./mocks/product.controller.mock');
+const { productListMock, newProductMock, productMock } = require('./mocks/product.controller.mock');
 
 describe('Teste de unidade da controller de produtos', function () {
   describe('Listando os produtos', function () {
@@ -79,6 +79,50 @@ describe('Teste de unidade da controller de produtos', function () {
       expect(res.json).to.have.been.calledWith({ message: 'Product not found' });
     });
   });
+  describe('cadastrando um novo produto', function () {
+    // it('ao enviar dados validos para salvar com sucesso', async function () {
+    //   const res = {};
+    //   const req = {
+    //     body: {
+    //       name: "Martelo de Thor",
+    //     },
+    //   };
+
+    //   res.status = sinon.stub().returns(res);
+    //   res.json = sinon.stub().returns();
+
+    //   sinon.stub(productService, 'createProduct').resolves({ type: null, message: newProductMock });
+
+    //   await productService.createProduct(req, res);
+
+    //   expect(res.status).to.have.been.calledWith(201);
+    //   expect(res.json).to.have.been.calledWith({ message: newProductMock });
+
+    // });
+    it("ao enviar dados invalidos, sem o nome no body", async function () {
+      const res = {};
+      const req = {
+        body: {
+        },
+      };
+
+      res.status = sinon.stub().returns(res);
+      res.json = sinon.stub().returns();
+
+      sinon
+        .stub(productService, "createProduct")
+        .resolves({ type: "INVALID_VALUE", message: '"name" is required' });
+      
+      await productController.createProduct(req, res);
+
+      expect(res.status).to.have.been.calledWith(422);
+      expect(res.json).to.have.been.calledWith({ message: '"name" is required'});
+
+
+
+      
+    });
+  })
   afterEach(function () {
     sinon.restore();
   });

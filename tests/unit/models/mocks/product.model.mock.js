@@ -13,6 +13,9 @@ const products = [
   },
 ];
 
+const newProduct = 'Arco do Gavião Arqueiro'
+
 module.exports = {
   products,
+  newProduct,
 };

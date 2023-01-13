@@ -5,7 +5,7 @@ const productService = require('../../../src/services/product.service');
 
 const productModel = require('../../../src/models/product.model');
 
-const { allProducts, invalidValue } = require('./mocks/product.service.mock');
+const { allProducts, invalidValue, invalidName, validName } = require('./mocks/product.service.mock');
 
 describe('Teste de unidade da service de produtos', function () {
   describe('listagem de produtos', function () {
@@ -44,6 +44,27 @@ describe('Teste de unidade da service de produtos', function () {
       expect(result.type).to.equal(null);
       expect(result.message).to.deep.equal(allProducts[0])
     });
+  })
+
+  describe('cadastro de um produto com valor invalido', function () {
+    it('retorna um erro ao passar um nome invalido', async function () {
+      const result = await productService.createProduct(invalidName);
+
+      expect(result.type).to.equal('INVALID_VALUE');
+      expect(result.message).to.equal( "\"name\" length must be at least 5 characters long" );
+    })
+  })
+
+  describe('cadastro de um produto com valor valido', function () {
+    it('retorna id do produto cadastrado', async function () {
+      sinon.stub(productModel, 'insert').resolves(1);
+      sinon.stub(productModel, 'findById').resolves(allProducts[0])
+
+      const result = await productService.createProduct(validName);
+
+      expect(result.type).to.equal(null);
+      expect(result.message).to.deep.equal(allProducts[0])
+    })
   })
    afterEach(function () {
      sinon.restore();

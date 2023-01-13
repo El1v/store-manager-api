@@ -10,7 +10,6 @@ const validateId = (id) => {
 
 const validateNewProduct = (nome) => {
   const { error } = schemas.addProductSchema.validate(nome);
-  console.log('error', error);
   if (error) {
     return { type: 'INVALID_VALUE', message: '"name" length must be at least 5 characters long' };
   } 
