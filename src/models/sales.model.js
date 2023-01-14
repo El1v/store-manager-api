@@ -31,7 +31,7 @@ const findAll = async () => {
     as salesProducts
     ON sales.id  = salesProducts.sale_id`,
   );
-  
+
   return camelize(result);
 };
 
@@ -43,10 +43,9 @@ const findById = async (id) => {
     ON sales.id  = salesProducts.sale_id
     WHERE id = ? `, [id],
   );
-  
+
   return camelize(result);
 };
-
 module.exports = {
   insert,
   findAll,
