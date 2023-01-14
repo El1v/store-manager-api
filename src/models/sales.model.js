@@ -24,6 +24,31 @@ const insert = async (sales) => {
   return camelize(saleObj);
 };
 
+const findAll = async () => {
+  const [result] = await connection.execute(
+    `SELECT id as sale_id, date, product_id, quantity FROM StoreManager.sales as sales
+    RIGHT JOIN StoreManager.sales_products
+    as salesProducts
+    ON sales.id  = salesProducts.sale_id`,
+  );
+  
+  return camelize(result);
+};
+
+const findById = async (id) => {
+  const [result] = await connection.execute(
+    `SELECT date, product_id, quantity FROM StoreManager.sales as sales
+    RIGHT JOIN StoreManager.sales_products
+    as salesProducts
+    ON sales.id  = salesProducts.sale_id
+    WHERE id = ? `, [id],
+  );
+  
+  return camelize(result);
+};
+
 module.exports = {
   insert,
+  findAll,
+  findById,
 };
