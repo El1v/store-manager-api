@@ -1,20 +1,27 @@
-// const camelize = require('camelize');
-const snakeize = require('snakeize');
+const camelize = require('camelize');
+// const snakeize = require('snakeize');
 const connection = require('./connection');
 
 const insert = async (sales) => {
-  const columns = Object.keys(snakeize(sales)).join(', ');
-
-  const placeholders = Object.keys(sales)
-    .map((_key) => '?')
-    .join(', ');
-
+  const date = new Date();
   const [{ insertId }] = await connection.execute(
-    `INSERT INTO StoreManager.products (${columns}) VALUE (${placeholders})`,
-    [...Object.values(sales)],
+    'INSERT INTO StoreManager.sales ( date ) VALUE ( ? )',
+    [date],
   );
 
-  return insertId;
+  sales.forEach(async ({ productId, quantity }) => {
+    await connection.execute(
+      'INSERT INTO StoreManager.sales_products (sale_id, product_id, quantity) VALUE (?, ?, ? )',
+      [insertId, productId, quantity],
+);
+  });
+
+  const saleObj = {
+    id: insertId,
+    itemsSold: sales,
+  };
+
+  return camelize(saleObj);
 };
 
 module.exports = {
