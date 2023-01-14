@@ -23,12 +23,27 @@ const createProduct = async (name) => {
   const newProductId = await productModel.insert(name);
   const newProduct = await productModel.findById(newProductId);
 
-  console.log(newProduct);
   return { type: null, message: newProduct };
+};
+
+const updateProduct = async (productId, name) => {
+  const errorId = schema.validateId(productId);
+  if (errorId.type) return errorId;
+
+  const product = await productModel.findById(productId);
+  if (!product) { return { type: 'PRODUCT_NOT_FOUND', message: 'Product not found' }; }
+
+  const errorName = schema.validateNewProduct(name);
+  if (errorName.type) return errorName;
+
+  const updatedProduct = await productModel.update(productId, name);
+
+  return { type: null, message: updatedProduct };
 };
 
 module.exports = {
   findAll,
   findById,
   createProduct,
+  updateProduct,
 };
