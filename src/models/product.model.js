@@ -37,9 +37,21 @@ const update = async (productId, name) => {
   }
 };
 
+const remove = async (productId) => {
+    console.log('chegou no model');
+  const [{ affectedRows }] = await connection.execute(
+    'DELETE FROM StoreManager.products WHERE id = ? ',
+    [productId],
+  );
+  if (affectedRows > 0) {
+    return '';
+  }
+};
+
 module.exports = {
   findAll,
   findById,
   insert,
   update,
+  remove,
 };
