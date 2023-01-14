@@ -10,6 +10,7 @@ const createSale = async (sales) => {
   });
 
   const resultProductById = await Promise.all(resultProductByIdPromises);
+  
   const productNotFound = resultProductById.some((product) => !product);
   if (productNotFound) return { type: 'PRODUCT_NOT_FOUND', message: 'Product not found' };
 

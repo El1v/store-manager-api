@@ -23,6 +23,7 @@ const createProduct = async (name) => {
   const newProductId = await productModel.insert(name);
   const newProduct = await productModel.findById(newProductId);
 
+  console.log(newProduct);
   return { type: null, message: newProduct };
 };
 
