@@ -57,9 +57,25 @@ const remove = async (saleId) => {
   }
 };
 
+const update = async (saleId, sales) => {
+  sales.forEach(async ({ productId, quantity }) => {
+    await connection.execute(
+      'UPDATE StoreManager.sales_products SET quantity = ? WHERE sale_id = ? AND product_id = ?',
+      [quantity, saleId, productId],
+    );
+  });
+  const saleObj = {
+    saleId,
+    itemsUpdated: sales,
+  };
+
+  return camelize(saleObj);
+};
+
 module.exports = {
   insert,
   findAll,
   findById,
   remove,
+  update,
 };
