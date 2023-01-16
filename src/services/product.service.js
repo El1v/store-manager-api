@@ -54,10 +54,22 @@ const removeProduct = async (productId) => {
   return { type: null, message: '' };
 };
 
+const findByName = async (name) => {
+  const products = await productModel.findAll();
+
+  if (!name) return { type: null, message: products };
+
+  const filtredProducts = products
+    .filter((product) => product.name.toLowerCase().includes(name.toLowerCase()));
+
+  return { type: null, message: filtredProducts };
+};
+
 module.exports = {
   findAll,
   findById,
   createProduct,
   updateProduct,
   removeProduct,
+  findByName,
 };
