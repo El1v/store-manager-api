@@ -39,7 +39,6 @@ const updateProduct = async (req, res) => {
 };
 
 const removeProduct = async (req, res) => {
-  console.log('chegou no controller');
   const { id } = req.params;
   const { type, message } = await productService.removeProduct(id);
 

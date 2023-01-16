@@ -42,8 +42,6 @@ const updateProduct = async (productId, name) => {
 };
 
 const removeProduct = async (productId) => {
-  console.log('chegou no service');
-
   const errorId = schema.validateId(productId);
   if (errorId.type) return errorId;
 
